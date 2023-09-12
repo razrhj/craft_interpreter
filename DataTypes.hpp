@@ -5,23 +5,33 @@
 #include <vector>
 namespace DataTypes {
 
+  enum Type {
+    Init,
+    Object,
+    Array,
+    String,
+    Number,
+    Key,
+    Value,
+    true,
+    false,
+    null
+  };
+
   struct Object;
   struct Array;
   struct Value;
 
   struct Object {
-    std::string _key;
-
-    Value* _val;
+    std::unordered_map<std::string, Value*> _key_val;
   };
 
   struct Array {
     std::vector<Value*> _vals;
   };
 
-
   struct Value {
-    int _type_id;
+    Type _type_id;
 
     union _val {
       Object _obj;
@@ -31,6 +41,7 @@ namespace DataTypes {
       int _inum;
     };
   };
+
 }
 
 namespace Datas {
