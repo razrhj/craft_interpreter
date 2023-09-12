@@ -11,14 +11,18 @@ namespace DataTypes {
 
   struct Object {
     std::string _key;
-    Value _val;
+
+    Value* _val;
   };
-  
+
   struct Array {
-    std::vector<Value> _vals; };
+    std::vector<Value*> _vals;
+  };
+
+
   struct Value {
-  
     int _type_id;
+
     union _val {
       Object _obj;
       Array _arr;
@@ -26,8 +30,11 @@ namespace DataTypes {
       double _fnum;
       int _inum;
     };
-    
   };
+}
+
+namespace Datas {
+  std::vector<std::string> tokens;
 }
 
 #endif // !DATA_TYPES
