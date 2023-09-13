@@ -2,50 +2,91 @@
 #define DATA_TYPES
 
 #include <string>
+#include <unordered_map>
 #include <vector>
+
 namespace DataTypes {
 
-  enum Type {
-    Init,
-    Object,
-    Array,
-    String,
-    Number,
-    Key,
-    Value,
-    true,
-    false,
-    null
+enum Type { Init, OBJECT, ARRAY, KEY, STRING, True, False, Null, NUMBER };
+
+struct Object;
+struct Array;
+struct Value;
+
+typedef struct Object {
+  std::unordered_map<std::string, struct Value *> _key_val;
+} Object;
+
+typedef struct Array {
+  std::vector<struct Value *> _vals;
+} Array;
+
+typedef struct Value {
+  Type _type_id;
+  std::string _path;
+
+  union {
+    Object _obj;
+    Array _arr;
+    std::string _str_or_bool_or_null;
+    double _fnum;
+    int _inum;
   };
 
-  struct Object;
-  struct Array;
-  struct Value;
+  Value() {
+    _type_id = Init;
+    _inum = -1;
+    _path = "";
+  }
 
-  struct Object {
-    std::unordered_map<std::string, Value*> _key_val;
-  };
+  Value(std::string path) : _path(path) {
+    _type_id = Init;
+    _inum = -1;
+  }
 
-  struct Array {
-    std::vector<Value*> _vals;
-  };
+  Value(Type type, std::string path) : _type_id(type), _path(path) {
+    switch (type) {
 
-  struct Value {
-    Type _type_id;
+    case Init:
+    case OBJECT:
+      _obj = Object();
+      break;
+    case ARRAY:
+      _arr = Array();
+      break;
+    case STRING:
+    case True:
+    case False:
+    case Null:
+    case KEY:
+      _str_or_bool_or_null = "";
+      break;
+    case NUMBER:
+      _inum = -1;
+      break;
+    default:
+      break;
+    }
+    _inum = -1;
+  }
 
-    union _val {
-      Object _obj;
-      Array _arr;
-      std::string _str_or_bool_or_null;
-      double _fnum;
-      int _inum;
-    };
-  };
+} Value;
 
-}
+} // namespace DataTypes
 
-namespace Datas {
-  std::vector<std::string> tokens;
-}
+class Datas {
+public:
+  Datas() = default;
+  Datas(Datas &&) = default;
+  Datas(const Datas &) = default;
+  Datas &operator=(Datas &&) = default;
+  Datas &operator=(const Datas &) = default;
+  ~Datas() = default;
+
+  static std::vector<std::string> tokens;
+  static std::unordered_map<std::string, DataTypes::Value *> values;
+
+private:
+};
 
 #endif // !DATA_TYPES

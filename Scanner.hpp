@@ -4,6 +4,7 @@
 #include "./DataTypes.hpp"
 #include <fstream>
 #include <regex>
+#include <string>
 
 class Scanner {
 public:
@@ -21,9 +22,10 @@ public:
     }
 
     std::string line;
-    while (_ifs >> line) {
+    while (std::getline(_ifs, line)) {
       _buffer += line;
     }
+    // printf("%s\n", _buffer.c_str());
   }
 
   bool isBlank(char c) {
@@ -38,6 +40,7 @@ public:
   void scanBuffer() {
     std::string temp;
     int queto = 0;
+    bool flag = true;
     for (int i = 0; i < _buffer.size(); ++i) {
       char c = _buffer[i];
       if (queto == 0) {
@@ -55,10 +58,17 @@ public:
           }
           temp += c;
         }
-      }
-      if (queto == 1) {
-        if (c == '"' && _buffer[i - 1] != '\\') {
+      } else if (queto == 1) {
+        while (c == '\\') {
+          flag = !flag;
+          temp += c;
+          i++;
+          c = _buffer[i];
+        }
+        if (c == '"' && flag) {
           queto++;
+        } else {
+          flag = true;
         }
         temp += c;
       }
