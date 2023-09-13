@@ -25,13 +25,13 @@ typedef struct Value {
   Type _type_id;
   std::string _path;
 
-  union {
-    Object _obj;
-    Array _arr;
-    std::string _str_or_bool_or_null;
-    double _fnum;
-    int _inum;
-  };
+  // union {
+  Object _obj;
+  Array _arr;
+  std::string _str_or_bool_or_null;
+  double _fnum;
+  int _inum;
+  // };
 
   Value() {
     _type_id = Init;
@@ -73,20 +73,5 @@ typedef struct Value {
 } Value;
 
 } // namespace DataTypes
-
-class Datas {
-public:
-  Datas() = default;
-  Datas(Datas &&) = default;
-  Datas(const Datas &) = default;
-  Datas &operator=(Datas &&) = default;
-  Datas &operator=(const Datas &) = default;
-  ~Datas() = default;
-
-  static std::vector<std::string> tokens;
-  static std::unordered_map<std::string, DataTypes::Value *> values;
-
-private:
-};
 
 #endif // !DATA_TYPES
