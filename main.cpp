@@ -18,9 +18,11 @@ int main(int argc, char *argv[]) {
 
   // jp.printValues();
 
-  std::unordered_map<std::string, DataTypes::Value *> hash = jp[R"("zone")"];
+  std::string str = R"("zone")";
 
-  printf("\"name\": \n");
+  std::unordered_map<std::string, DataTypes::Value *> hash = jp[str];
+
+  printf("%s: \n", str.c_str());
   for (auto it = hash.begin(); it != hash.end(); it++) {
     printf("\t%s\n", it->first.c_str());
   }
