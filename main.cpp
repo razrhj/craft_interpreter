@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 
   JsonParser jp;
 
-  jp.readFromFile("./json_examples.json");
+  jp.readFromFile("./json_example2.json");
   jp.scanBuffer();
   if (jp.parse() != nullptr) {
     printf("true\n");
@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 
   // jp.printValues();
 
-  std::unordered_map<std::string, DataTypes::Value *> hash = jp[R"("name")"];
+  std::unordered_map<std::string, DataTypes::Value *> hash = jp[R"("zone")"];
 
   printf("\"name\": \n");
   for (auto it = hash.begin(); it != hash.end(); it++) {

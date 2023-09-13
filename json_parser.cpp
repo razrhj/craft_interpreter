@@ -9,7 +9,7 @@ DataTypes::Value *JsonParser::readNumber(const std::string path) {
   // std::regex
   // number_regex(R"(-?(0|[1-9][0-9]*)(\.[0-9]+)?((e|E)[-+]?[0-9]+)?)");
 
-  std::regex int_regex(R"(-?([1-9][0-9]*))");
+  std::regex int_regex(R"(-?(0|[1-9][0-9]*))");
 
   std::regex float_regex(
       R"(-?(0|[1-9][0-9]*)((\.[0-9]+)|(e|E[-+]?[0-9]+)|(\.[0-9]+(e|E)[-+]?[0-9]+)))");
