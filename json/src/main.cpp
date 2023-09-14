@@ -1,5 +1,5 @@
-#include "./json_parser.hpp"
-#include "DataTypes.hpp"
+#include "../include/DataTypes.hpp"
+#include "../include/json_parser.hpp"
 #include <cstdio>
 #include <regex>
 #include <unordered_map>
@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 
   JsonParser jp;
 
-  jp.readFromFile("./json_example2.json");
+  jp.readFromFile("../json_examples/json_example2.json");
   jp.scanBuffer();
   if (jp.parse() != nullptr) {
     printf("true\n");

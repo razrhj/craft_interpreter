@@ -1,38 +1,44 @@
-#include "./parser.hpp"
-#include "DataTypes.hpp"
+#include "../include/json_parser.hpp"
+#include <cstdio>
 #include <string>
 
-DataTypes::Value *Parser::readNumber(const std::string path) {
+DataTypes::Value *JsonParser::readNumber(const std::string path) {
 
   DataTypes::Value *t_num = new DataTypes::Value(DataTypes::NUMBER, path);
 
   // std::regex
   // number_regex(R"(-?(0|[1-9][0-9]*)(\.[0-9]+)?((e|E)[-+]?[0-9]+)?)");
 
-  std::regex int_regex(R"(-?([1-9][0-9]*))");
+  std::regex int_regex(R"(-?(0|[1-9][0-9]*))");
 
   std::regex float_regex(
       R"(-?(0|[1-9][0-9]*)((\.[0-9]+)|(e|E[-+]?[0-9]+)|(\.[0-9]+(e|E)[-+]?[0-9]+)))");
 
   std::string token = Peek();
+  // printf("number: %s\n", token.c_str());
 
   if (std::regex_match(token, int_regex)) {
     t_num->_inum = std::stoi(token);
-    Datas::values[path + token] = t_num;
+    _values[token][path] = t_num;
+    idxForward();
     return t_num;
   }
   if (std::regex_match(token, float_regex)) {
     t_num->_fnum = std::stod(token);
-    Datas::values[path + token] = t_num;
+    _values[token][path] = t_num;
+    idxForward();
     return t_num;
   }
+
+  // printf("not a number\n");
   return nullptr;
 }
 
-DataTypes::Value *Parser::readSpecialLiteral(const std::string path) {
+DataTypes::Value *JsonParser::readSpecialLiteral(const std::string path) {
   DataTypes::Value *t_sl = new DataTypes::Value(path);
 
   std::string token = Peek();
+  // printf("special literal: %s\n", token.c_str());
 
   if (token == "true") {
     t_sl->_type_id = DataTypes::True;
@@ -46,24 +52,29 @@ DataTypes::Value *Parser::readSpecialLiteral(const std::string path) {
 
   t_sl->_path += token;
 
-  Datas::values[path + token] = t_sl;
+  _values[token][path] = t_sl;
+  idxForward();
 
   return t_sl;
 }
 
-DataTypes::Value *Parser::readString(const std::string path) {
+DataTypes::Value *JsonParser::readString(const std::string path) {
 
   DataTypes::Value *t_str = new DataTypes::Value(DataTypes::STRING, path);
 
   std::string token = Peek();
+  // printf("string: %s\n", token.c_str());
   // std::regex string_regex(
   //     R"("([^\"\\]|(\\(\\|\"|\/|\b|\r|\n|\f|\t|(\u[0-9a-fA-F]{4}))))*")");
   std::regex string_regex(R"("([^\"\\]|(\\(\\|\"|\/|\b|\r|\n|\f|\t)))*")");
   if (std::regex_match(token, string_regex)) {
     t_str->_str_or_bool_or_null = token;
-    Datas::values[path + token] = t_str;
+    _values[token][path] = t_str;
+    ;
+    idxForward();
     return t_str;
   }
+  // printf("not a string\n");
   return nullptr;
 
   // if (token[0] == '"') {
@@ -88,13 +99,14 @@ DataTypes::Value *Parser::readString(const std::string path) {
   // return true;
 }
 
-DataTypes::Value *Parser::readKey(const std::string path) {
+DataTypes::Value *JsonParser::readKey(const std::string path) {
   return readString(path);
 }
 
-DataTypes::Value *Parser::readValue(const std::string path) {
+DataTypes::Value *JsonParser::readValue(const std::string path) {
 
   std::string token = Peek();
+  // printf("readValue: %s\n", token.c_str());
 
   if (token == "{") {
     idxForward();
@@ -114,64 +126,116 @@ DataTypes::Value *Parser::readValue(const std::string path) {
     return readNumber(path);
   }
 
+  // printf("path: %s\n", path.c_str());
+  // printf("value: expected a value\n");
   return nullptr;
 }
 
-DataTypes::Value *Parser::readObject(const std::string path) {
-  std::string cur_obj_id = "object" + std::to_string(_id_obj + 1);
+DataTypes::Value *JsonParser::readObject(const std::string path) {
+  std::string cur_obj_id = "object" + std::to_string(++_id_obj);
   std::string local_path = path + cur_obj_id;
 
   DataTypes::Value *t_obj = new DataTypes::Value(DataTypes::OBJECT, local_path);
 
   std::string token = Peek();
+  // printf("readObject: %s\n", token.c_str());
 
   while (token != "}") {
+    token = Peek();
+    // printf("readObject: %s\n", token.c_str());
     std::string key;
     if (readKey(local_path + "/")) {
-      idxForward();
       key = token;
-    }
 
-    token = Peek();
+      token = Peek();
+      // printf("readObject: %s\n", token.c_str());
 
-    if (token == ":") {
-      idxForward();
-      DataTypes::Value *val = readValue(local_path + "/");
-      if (val) {
-        t_obj->_obj._key_val[key] = val;
+      if (token == ":") {
+        idxForward();
+        DataTypes::Value *val = readValue(local_path + "/");
+        if (val) {
+          t_obj->_obj._key_val[key] = val;
+
+          token = Peek();
+          // printf("readObject: %s\n", token.c_str());
+
+          if (token == ",") {
+            idxForward();
+
+          } else if (token == "}") {
+
+            idxForward();
+
+            _values[cur_obj_id][path] = t_obj;
+            // _id_obj++;
+            return t_obj;
+
+          } else {
+            // printf("object: expected \",\"\n");
+            return nullptr;
+          }
+        } else {
+          // printf("object: expected: a value\n");
+        }
+      } else {
+        // printf("object: expected a \":\"\n");
+        return nullptr;
       }
     } else {
+      // printf("object: expected a key\n");
       return nullptr;
     }
   }
 
-  Datas::values[cur_obj_id] = t_obj;
-  _id_obj++;
+  idxForward();
+
+  _values[cur_obj_id][path] = t_obj;
+  // _id_obj++;
 
   return t_obj;
 }
 
-DataTypes::Value *Parser::readArray(const std::string path) {
-  std::string cur_arr_id = "array" + std::to_string(_id_arr + 1);
+DataTypes::Value *JsonParser::readArray(const std::string path) {
+  std::string cur_arr_id = "array" + std::to_string(++_id_arr);
   std::string local_path = path + cur_arr_id;
 
   DataTypes::Value *t_arr = new DataTypes::Value(DataTypes::ARRAY, local_path);
 
   std::string token = Peek();
+  // printf("readArray: %s\n", token.c_str());
 
   while (token != "]") {
+    token = Peek();
+    // printf("readArray: %s\n", token.c_str());
     DataTypes::Value *val = readValue(local_path + "/");
     t_arr->_arr._vals.push_back(val);
+
+    token = Peek();
+    // printf("readArray: %s\n", token.c_str());
     if (token == ",") {
-      readValue(local_path + "/");
-      t_arr->_arr._vals.push_back(val);
+      idxForward();
+
+    } else if (token == "]") {
+
+      idxForward();
+
+      _values[cur_arr_id][path] = t_arr;
+      // _id_arr++;
+
+      return t_arr;
+
+    } else {
+      // printf("array: expected a \",\"\n");
+      return nullptr;
     }
   }
 
-  Datas::values[cur_arr_id] = t_arr;
-  _id_arr++;
+  idxForward();
+
+  _values[cur_arr_id][path] = t_arr;
+  // _id_arr++;
 
   return t_arr;
 }
 
-DataTypes::Value *Parser::parse() { return readValue("/"); }
+DataTypes::Value *JsonParser::parse() { return readValue("/"); }
