@@ -2,6 +2,12 @@
 #include <cstdio>
 #include <string>
 
+std::string JsonParser::Peek() {
+  return _idx + 1 < _tokens.size() ? _tokens[_idx + 1] : "";
+}
+
+void JsonParser::idxForward() { _idx++; }
+
 DataTypes::Value *JsonParser::readNumber(const std::string path) {
 
   DataTypes::Value *t_num = new DataTypes::Value(DataTypes::NUMBER, path);

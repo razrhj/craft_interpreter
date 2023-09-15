@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/a.out.dir/json_parser.cpp.o"
-  "CMakeFiles/a.out.dir/json_parser.cpp.o.d"
+  "CMakeFiles/a.out.dir/json_parser_parse.cpp.o"
+  "CMakeFiles/a.out.dir/json_parser_parse.cpp.o.d"
+  "CMakeFiles/a.out.dir/json_parser_scan.cpp.o"
+  "CMakeFiles/a.out.dir/json_parser_scan.cpp.o.d"
   "CMakeFiles/a.out.dir/main.cpp.o"
   "CMakeFiles/a.out.dir/main.cpp.o.d"
   "a.out"

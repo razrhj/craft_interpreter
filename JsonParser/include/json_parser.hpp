@@ -62,76 +62,19 @@ public:
     }
   }
 
-  void readFromFile(std::string file_path) {
-    _ifs.open(file_path, _ifs.in);
+  // Scan
+  void readFromFile(std::string file_path);
 
-    if (!_ifs.is_open()) {
-      printf("failed to open %s!\n", file_path.c_str());
-      exit(1);
-    }
+  bool isBlank(char c);
 
-    std::string line;
-    while (std::getline(_ifs, line)) {
-      _buffer += line;
-    }
-    // printf("%s\n", _buffer.c_str());
-  }
+  bool isSeparator(char c);
 
-  bool isBlank(char c) {
-    return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\v' ||
-           c == '\b' || c == '\f';
-  }
+  void scanBuffer();
 
-  bool isSeparator(char c) {
-    return c == '{' || c == '}' || c == '[' || c == ']' || c == ':' || c == ',';
-  }
+  // Parse
+  std::string Peek();
 
-  void scanBuffer() {
-    std::string temp;
-    int queto = 0;
-    bool flag = true;
-    for (int i = 0; i < _buffer.size(); ++i) {
-      char c = _buffer[i];
-      if (queto == 0) {
-        if (isBlank(c) || isSeparator(c)) {
-          if (!temp.empty()) {
-            _tokens.push_back(temp);
-            temp.clear();
-          }
-          if (isSeparator(c)) {
-            _tokens.push_back(std::string(1, c));
-          }
-        } else {
-          if (c == '"') {
-            queto++;
-          }
-          temp += c;
-        }
-      } else if (queto == 1) {
-        while (c == '\\') {
-          flag = !flag;
-          temp += c;
-          i++;
-          c = _buffer[i];
-        }
-        if (c == '"' && flag) {
-          queto++;
-        } else {
-          flag = true;
-        }
-        temp += c;
-      }
-      if (queto == 2) {
-        queto = 0;
-      }
-    }
-  }
-
-  std::string Peek() {
-    return _idx + 1 < _tokens.size() ? _tokens[_idx + 1] : "";
-  }
-
-  void idxForward() { _idx++; }
+  void idxForward();
 
   DataTypes::Value *readNumber(const std::string path);
 
