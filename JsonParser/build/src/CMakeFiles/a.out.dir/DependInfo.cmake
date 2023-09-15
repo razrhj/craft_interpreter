@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/flower/Code/craft_interpreter/json/src/json_parser.cpp" "src/CMakeFiles/a.out.dir/json_parser.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/json_parser.cpp.o.d"
-  "/home/flower/Code/craft_interpreter/json/src/main.cpp" "src/CMakeFiles/a.out.dir/main.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/main.cpp.o.d"
+  "/home/flower/Code/craft_interpreter/JsonParser/src/json_parser.cpp" "src/CMakeFiles/a.out.dir/json_parser.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/json_parser.cpp.o.d"
+  "/home/flower/Code/craft_interpreter/JsonParser/src/main.cpp" "src/CMakeFiles/a.out.dir/main.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

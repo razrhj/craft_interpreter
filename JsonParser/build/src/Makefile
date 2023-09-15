@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/flower/Code/craft_interpreter/json
+CMAKE_SOURCE_DIR = /home/flower/Code/craft_interpreter/JsonParser
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/flower/Code/craft_interpreter/json/build
+CMAKE_BINARY_DIR = /home/flower/Code/craft_interpreter/JsonParser/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/flower/Code/craft_interpreter/json/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/flower/Code/craft_interpreter/json/build/CMakeFiles /home/flower/Code/craft_interpreter/json/build/src//CMakeFiles/progress.marks
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/flower/Code/craft_interpreter/json/build/CMakeFiles 0
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles /home/flower/Code/craft_interpreter/JsonParser/build/src//CMakeFiles/progress.marks
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/flower/Code/craft_interpreter/json/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/a.out.dir/rule:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/a.out.dir/rule
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/a.out.dir/rule
 .PHONY : src/CMakeFiles/a.out.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ a.out: src/CMakeFiles/a.out.dir/rule
 
 # fast build rule for target.
 a.out/fast:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/build
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/build
 .PHONY : a.out/fast
 
 json_parser.o: json_parser.cpp.o
@@ -135,7 +135,7 @@ json_parser.o: json_parser.cpp.o
 
 # target to build an object file
 json_parser.cpp.o:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser.cpp.o
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser.cpp.o
 .PHONY : json_parser.cpp.o
 
 json_parser.i: json_parser.cpp.i
@@ -143,7 +143,7 @@ json_parser.i: json_parser.cpp.i
 
 # target to preprocess a source file
 json_parser.cpp.i:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser.cpp.i
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser.cpp.i
 .PHONY : json_parser.cpp.i
 
 json_parser.s: json_parser.cpp.s
@@ -151,7 +151,7 @@ json_parser.s: json_parser.cpp.s
 
 # target to generate assembly for a file
 json_parser.cpp.s:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser.cpp.s
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser.cpp.s
 .PHONY : json_parser.cpp.s
 
 main.o: main.cpp.o
@@ -159,7 +159,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/main.cpp.o
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -167,7 +167,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/main.cpp.i
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -175,7 +175,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/flower/Code/craft_interpreter/json/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/main.cpp.s
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -204,6 +204,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/flower/Code/craft_interpreter/json/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

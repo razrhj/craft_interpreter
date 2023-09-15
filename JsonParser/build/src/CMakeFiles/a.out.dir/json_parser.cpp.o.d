@@ -1,8 +1,8 @@
 src/CMakeFiles/a.out.dir/json_parser.cpp.o: \
- /home/flower/Code/craft_interpreter/json/src/json_parser.cpp \
+ /home/flower/Code/craft_interpreter/JsonParser/src/json_parser.cpp \
  /usr/include/stdc-predef.h \
- /home/flower/Code/craft_interpreter/json/src/../include/json_parser.hpp \
- /home/flower/Code/craft_interpreter/json/src/../include/./DataTypes.hpp \
+ /home/flower/Code/craft_interpreter/JsonParser/src/../include/json_parser.hpp \
+ /home/flower/Code/craft_interpreter/JsonParser/src/../include/./DataTypes.hpp \
  /usr/include/c++/13.2.1/string \
  /usr/include/c++/13.2.1/bits/requires_hosted.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \

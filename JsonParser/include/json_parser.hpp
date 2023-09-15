@@ -31,7 +31,15 @@ public:
   JsonParser(const JsonParser &) = delete;
   JsonParser &operator=(JsonParser &&) = default;
   JsonParser &operator=(const JsonParser &) = delete;
-  ~JsonParser() = default;
+  // ~JsonParser() = default;
+  ~JsonParser() {
+    std::unordered_map<std::string, DataTypes::Value *> empty;
+    for (auto it1 = _values.begin(); it1 != _values.end(); it1++) {
+      for (auto it2 = it1->second.begin(); it2 != it1->second.end(); it2++) {
+        delete it2->second;
+      }
+    }
+  }
 
   std::unordered_map<std::string, DataTypes::Value *> const
   operator[](const std::string str) {

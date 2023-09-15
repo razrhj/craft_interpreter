@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/flower/Code/craft_interpreter/json
+CMAKE_SOURCE_DIR = /home/flower/Code/craft_interpreter/JsonParser
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/flower/Code/craft_interpreter/json/build
+CMAKE_BINARY_DIR = /home/flower/Code/craft_interpreter/JsonParser/build
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/a.out.dir/depend.make
@@ -70,32 +70,32 @@ include src/CMakeFiles/a.out.dir/progress.make
 include src/CMakeFiles/a.out.dir/flags.make
 
 src/CMakeFiles/a.out.dir/main.cpp.o: src/CMakeFiles/a.out.dir/flags.make
-src/CMakeFiles/a.out.dir/main.cpp.o: /home/flower/Code/craft_interpreter/json/src/main.cpp
+src/CMakeFiles/a.out.dir/main.cpp.o: /home/flower/Code/craft_interpreter/JsonParser/src/main.cpp
 src/CMakeFiles/a.out.dir/main.cpp.o: src/CMakeFiles/a.out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/flower/Code/craft_interpreter/json/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/a.out.dir/main.cpp.o"
-	cd /home/flower/Code/craft_interpreter/json/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/a.out.dir/main.cpp.o -MF CMakeFiles/a.out.dir/main.cpp.o.d -o CMakeFiles/a.out.dir/main.cpp.o -c /home/flower/Code/craft_interpreter/json/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/a.out.dir/main.cpp.o"
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/a.out.dir/main.cpp.o -MF CMakeFiles/a.out.dir/main.cpp.o.d -o CMakeFiles/a.out.dir/main.cpp.o -c /home/flower/Code/craft_interpreter/JsonParser/src/main.cpp
 
 src/CMakeFiles/a.out.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/a.out.dir/main.cpp.i"
-	cd /home/flower/Code/craft_interpreter/json/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/flower/Code/craft_interpreter/json/src/main.cpp > CMakeFiles/a.out.dir/main.cpp.i
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/flower/Code/craft_interpreter/JsonParser/src/main.cpp > CMakeFiles/a.out.dir/main.cpp.i
 
 src/CMakeFiles/a.out.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/a.out.dir/main.cpp.s"
-	cd /home/flower/Code/craft_interpreter/json/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/flower/Code/craft_interpreter/json/src/main.cpp -o CMakeFiles/a.out.dir/main.cpp.s
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/flower/Code/craft_interpreter/JsonParser/src/main.cpp -o CMakeFiles/a.out.dir/main.cpp.s
 
 src/CMakeFiles/a.out.dir/json_parser.cpp.o: src/CMakeFiles/a.out.dir/flags.make
-src/CMakeFiles/a.out.dir/json_parser.cpp.o: /home/flower/Code/craft_interpreter/json/src/json_parser.cpp
+src/CMakeFiles/a.out.dir/json_parser.cpp.o: /home/flower/Code/craft_interpreter/JsonParser/src/json_parser.cpp
 src/CMakeFiles/a.out.dir/json_parser.cpp.o: src/CMakeFiles/a.out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/flower/Code/craft_interpreter/json/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/a.out.dir/json_parser.cpp.o"
-	cd /home/flower/Code/craft_interpreter/json/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/a.out.dir/json_parser.cpp.o -MF CMakeFiles/a.out.dir/json_parser.cpp.o.d -o CMakeFiles/a.out.dir/json_parser.cpp.o -c /home/flower/Code/craft_interpreter/json/src/json_parser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/a.out.dir/json_parser.cpp.o"
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/a.out.dir/json_parser.cpp.o -MF CMakeFiles/a.out.dir/json_parser.cpp.o.d -o CMakeFiles/a.out.dir/json_parser.cpp.o -c /home/flower/Code/craft_interpreter/JsonParser/src/json_parser.cpp
 
 src/CMakeFiles/a.out.dir/json_parser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/a.out.dir/json_parser.cpp.i"
-	cd /home/flower/Code/craft_interpreter/json/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/flower/Code/craft_interpreter/json/src/json_parser.cpp > CMakeFiles/a.out.dir/json_parser.cpp.i
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/flower/Code/craft_interpreter/JsonParser/src/json_parser.cpp > CMakeFiles/a.out.dir/json_parser.cpp.i
 
 src/CMakeFiles/a.out.dir/json_parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/a.out.dir/json_parser.cpp.s"
-	cd /home/flower/Code/craft_interpreter/json/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/flower/Code/craft_interpreter/json/src/json_parser.cpp -o CMakeFiles/a.out.dir/json_parser.cpp.s
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/flower/Code/craft_interpreter/JsonParser/src/json_parser.cpp -o CMakeFiles/a.out.dir/json_parser.cpp.s
 
 # Object files for target a.out
 a_out_OBJECTS = \
@@ -109,18 +109,18 @@ src/a.out: src/CMakeFiles/a.out.dir/main.cpp.o
 src/a.out: src/CMakeFiles/a.out.dir/json_parser.cpp.o
 src/a.out: src/CMakeFiles/a.out.dir/build.make
 src/a.out: src/CMakeFiles/a.out.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/flower/Code/craft_interpreter/json/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable a.out"
-	cd /home/flower/Code/craft_interpreter/json/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/a.out.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable a.out"
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/a.out.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/a.out.dir/build: src/a.out
 .PHONY : src/CMakeFiles/a.out.dir/build
 
 src/CMakeFiles/a.out.dir/clean:
-	cd /home/flower/Code/craft_interpreter/json/build/src && $(CMAKE_COMMAND) -P CMakeFiles/a.out.dir/cmake_clean.cmake
+	cd /home/flower/Code/craft_interpreter/JsonParser/build/src && $(CMAKE_COMMAND) -P CMakeFiles/a.out.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/a.out.dir/clean
 
 src/CMakeFiles/a.out.dir/depend:
-	cd /home/flower/Code/craft_interpreter/json/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/flower/Code/craft_interpreter/json /home/flower/Code/craft_interpreter/json/src /home/flower/Code/craft_interpreter/json/build /home/flower/Code/craft_interpreter/json/build/src /home/flower/Code/craft_interpreter/json/build/src/CMakeFiles/a.out.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/flower/Code/craft_interpreter/JsonParser /home/flower/Code/craft_interpreter/JsonParser/src /home/flower/Code/craft_interpreter/JsonParser/build /home/flower/Code/craft_interpreter/JsonParser/build/src /home/flower/Code/craft_interpreter/JsonParser/build/src/CMakeFiles/a.out.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : src/CMakeFiles/a.out.dir/depend
 
