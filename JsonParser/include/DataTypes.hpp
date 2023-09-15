@@ -9,6 +9,42 @@ namespace DataTypes {
 
 enum Type { Init, OBJECT, ARRAY, KEY, STRING, True, False, Null, NUMBER };
 
+inline std::string getType(const Type type) {
+  std::string ret = "NONE";
+
+  switch (type) {
+
+  case Init:
+    ret = "Init";
+    break;
+  case OBJECT:
+    ret = "OBJECT";
+    break;
+  case ARRAY:
+    ret = "ARRAY";
+    break;
+  case KEY:
+    ret = "KEY";
+    break;
+  case STRING:
+    ret = STRING;
+    break;
+  case True:
+    ret = "True";
+    break;
+  case False:
+    ret = "False";
+    break;
+  case Null:
+    ret = "Null";
+    break;
+  case NUMBER:
+    ret = "NUMBER";
+    break;
+  }
+  return ret;
+}
+
 struct Object;
 struct Array;
 struct Value;
@@ -20,7 +56,6 @@ typedef struct Object {
 typedef struct Array {
   std::vector<struct Value *> _vals;
 } Array;
-
 typedef struct Value {
   Type _type_id;
   std::string _path;

@@ -32,11 +32,45 @@ public:
   JsonParser &operator=(JsonParser &&) = default;
   JsonParser &operator=(const JsonParser &) = delete;
   // ~JsonParser() = default;
+
+  void freeMemory(DataTypes::Value *val) {
+    if (val) {
+      if (val->_type_id == DataTypes::OBJECT) {
+        for (auto it = val->_obj._key_val.begin();
+             it != val->_obj._key_val.end(); it++) {
+          if (it->second) {
+            freeMemory(it->second);
+            // it->second = nullptr;
+          }
+        }
+        // auto empty = std::unordered_map<std::string, DataTypes::Value *>();
+        // std::swap(val->_obj._key_val, empty);
+      } else if (val->_type_id == DataTypes::ARRAY) {
+        for (auto it = val->_arr._vals.begin(); it != val->_arr._vals.end();
+             it++) {
+          if (*it) {
+            freeMemory(*it);
+            // *it = nullptr;
+          }
+        }
+        // auto empty = std::vector<DataTypes::Value *>();
+        // swap(val->_arr._vals, empty);
+      } else {
+        if (val) {
+          delete val;
+          // val = nullptr;
+        }
+      }
+    }
+  }
   ~JsonParser() {
     std::unordered_map<std::string, DataTypes::Value *> empty;
     for (auto it1 = _values.begin(); it1 != _values.end(); it1++) {
       for (auto it2 = it1->second.begin(); it2 != it1->second.end(); it2++) {
-        delete it2->second;
+        if (it2->second) {
+          freeMemory(it2->second);
+          // it2->second = nullptr;
+        }
       }
     }
   }

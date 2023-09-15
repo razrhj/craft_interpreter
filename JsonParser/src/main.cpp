@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 
   JsonParser jp;
 
-  jp.readFromFile("../json_examples/json_example2.json");
+  jp.readFromFile("../json_examples/json_example3.json");
   jp.scanBuffer();
   if (jp.parse() != nullptr) {
     printf("true\n");
