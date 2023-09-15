@@ -5,9 +5,11 @@
 
 #include <cstdio>
 #include <fstream>
+#include <memory>
 #include <regex>
 #include <string>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 class JsonParser {
@@ -18,8 +20,9 @@ private:
   int _id_arr;
   int _id_obj;
   std::vector<std::string> _tokens;
-  std::unordered_map<std::string,
-                     std::unordered_map<std::string, DataTypes::Value *>>
+  std::unordered_map<
+      std::string,
+      std::unordered_map<std::string, std::shared_ptr<DataTypes::Value>>>
       _values;
 
 public:
@@ -31,51 +34,9 @@ public:
   JsonParser(const JsonParser &) = delete;
   JsonParser &operator=(JsonParser &&) = default;
   JsonParser &operator=(const JsonParser &) = delete;
-  // ~JsonParser() = default;
+  ~JsonParser() = default;
 
-  void freeMemory(DataTypes::Value *val) {
-    if (val) {
-      if (val->_type_id == DataTypes::OBJECT) {
-        for (auto it = val->_obj._key_val.begin();
-             it != val->_obj._key_val.end(); it++) {
-          if (it->second) {
-            freeMemory(it->second);
-            // it->second = nullptr;
-          }
-        }
-        // auto empty = std::unordered_map<std::string, DataTypes::Value *>();
-        // std::swap(val->_obj._key_val, empty);
-      } else if (val->_type_id == DataTypes::ARRAY) {
-        for (auto it = val->_arr._vals.begin(); it != val->_arr._vals.end();
-             it++) {
-          if (*it) {
-            freeMemory(*it);
-            // *it = nullptr;
-          }
-        }
-        // auto empty = std::vector<DataTypes::Value *>();
-        // swap(val->_arr._vals, empty);
-      } else {
-        if (val) {
-          delete val;
-          // val = nullptr;
-        }
-      }
-    }
-  }
-  ~JsonParser() {
-    std::unordered_map<std::string, DataTypes::Value *> empty;
-    for (auto it1 = _values.begin(); it1 != _values.end(); it1++) {
-      for (auto it2 = it1->second.begin(); it2 != it1->second.end(); it2++) {
-        if (it2->second) {
-          freeMemory(it2->second);
-          // it2->second = nullptr;
-        }
-      }
-    }
-  }
-
-  std::unordered_map<std::string, DataTypes::Value *> const
+  std::unordered_map<std::string, std::shared_ptr<DataTypes::Value>> const
   operator[](const std::string str) {
     return _values[str];
   }
@@ -110,21 +71,21 @@ public:
 
   void idxForward();
 
-  DataTypes::Value *readNumber(const std::string path);
+  std::shared_ptr<DataTypes::Value> readNumber(const std::string path);
 
-  DataTypes::Value *readSpecialLiteral(const std::string path);
+  std::shared_ptr<DataTypes::Value> readSpecialLiteral(const std::string path);
 
-  DataTypes::Value *readString(const std::string path);
+  std::shared_ptr<DataTypes::Value> readString(const std::string path);
 
-  DataTypes::Value *readKey(const std::string path);
+  std::shared_ptr<DataTypes::Value> readKey(const std::string path);
 
-  DataTypes::Value *readValue(const std::string path);
+  std::shared_ptr<DataTypes::Value> readValue(const std::string path);
 
-  DataTypes::Value *readObject(const std::string path);
+  std::shared_ptr<DataTypes::Value> readObject(const std::string path);
 
-  DataTypes::Value *readArray(const std::string path);
+  std::shared_ptr<DataTypes::Value> readArray(const std::string path);
 
-  DataTypes::Value *parse();
+  std::shared_ptr<DataTypes::Value> parse();
 };
 
 #endif // !JSON_PARSER

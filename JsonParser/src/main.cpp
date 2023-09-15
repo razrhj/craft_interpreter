@@ -1,6 +1,7 @@
 #include "../include/DataTypes.hpp"
 #include "../include/json_parser.hpp"
 #include <cstdio>
+#include <memory>
 #include <regex>
 #include <unordered_map>
 
@@ -18,9 +19,10 @@ int main(int argc, char *argv[]) {
 
   // jp.printValues();
 
-  std::string str = R"("zone")";
+  std::string str = R"("betaServer")";
 
-  std::unordered_map<std::string, DataTypes::Value *> hash = jp[str];
+  std::unordered_map<std::string, std::shared_ptr<DataTypes::Value>> hash =
+      jp[str];
 
   printf("%s: \n", str.c_str());
   for (auto it = hash.begin(); it != hash.end(); it++) {
