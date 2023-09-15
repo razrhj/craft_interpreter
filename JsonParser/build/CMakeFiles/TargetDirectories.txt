@@ -1,0 +1,5 @@
+/home/flower/Code/craft_interpreter/json/build/CMakeFiles/edit_cache.dir
+/home/flower/Code/craft_interpreter/json/build/CMakeFiles/rebuild_cache.dir
+/home/flower/Code/craft_interpreter/json/build/src/CMakeFiles/a.out.dir
+/home/flower/Code/craft_interpreter/json/build/src/CMakeFiles/edit_cache.dir
+/home/flower/Code/craft_interpreter/json/build/src/CMakeFiles/rebuild_cache.dir
