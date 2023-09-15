@@ -72,10 +72,9 @@ JsonParser::readSpecialLiteral(const std::string path) {
 }
 
 std::shared_ptr<DataTypes::Value>
-JsonParser::readString(const std::string path) {
+JsonParser::readString(const std::string path, const DataTypes::Type type) {
 
-  std::shared_ptr<DataTypes::Value> t_str(
-      new DataTypes::Value(DataTypes::STRING, path));
+  std::shared_ptr<DataTypes::Value> t_str(new DataTypes::Value(type, path));
 
   std::string token = Peek();
   // printf("string: %s\n", token.c_str());
@@ -115,7 +114,7 @@ JsonParser::readString(const std::string path) {
 }
 
 std::shared_ptr<DataTypes::Value> JsonParser::readKey(const std::string path) {
-  return readString(path);
+  return readString(path, DataTypes::KEY);
 }
 
 std::shared_ptr<DataTypes::Value>
@@ -136,7 +135,7 @@ JsonParser::readValue(const std::string path) {
     return readSpecialLiteral(path);
   }
   if (token[0] == '"') {
-    return readString(path);
+    return readString(path, DataTypes::STRING);
   }
   if (token[0] == '-' || (token[0] >= '0' && token[0] <= '9')) {
     return readNumber(path);
@@ -172,8 +171,8 @@ JsonParser::readObject(const std::string path) {
         idxForward();
         std::shared_ptr<DataTypes::Value> val = readValue(local_path + "/");
         if (val) {
-          if (auto temp = std::get_if<DataTypes::Object>(&(t_obj->_val))) {
-            temp->_key_val[key] = val;
+          if (auto obj = std::get_if<DataTypes::Object>(&(t_obj->_val))) {
+            obj->_key_val[key] = val;
           }
 
           token = Peek();
@@ -230,8 +229,8 @@ JsonParser::readArray(const std::string path) {
     token = Peek();
     // printf("readArray: %s\n", token.c_str());
     std::shared_ptr<DataTypes::Value> val = readValue(local_path + "/");
-    if (auto temp = std::get_if<DataTypes::Array>(&(t_arr->_val))) {
-      temp->_vals.push_back(val);
+    if (auto arr = std::get_if<DataTypes::Array>(&(t_arr->_val))) {
+      arr->_vals.push_back(val);
     }
 
     token = Peek();

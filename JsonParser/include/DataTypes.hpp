@@ -29,7 +29,7 @@ inline std::string getType(const Type type) {
     ret = "KEY";
     break;
   case STRING:
-    ret = STRING;
+    ret = "STRING";
     break;
   case True:
     ret = "True";

@@ -75,7 +75,8 @@ public:
 
   std::shared_ptr<DataTypes::Value> readSpecialLiteral(const std::string path);
 
-  std::shared_ptr<DataTypes::Value> readString(const std::string path);
+  std::shared_ptr<DataTypes::Value> readString(const std::string path,
+                                               const DataTypes::Type type);
 
   std::shared_ptr<DataTypes::Value> readKey(const std::string path);
 
