@@ -262,3 +262,11 @@ JsonParser::readArray(const std::string path) {
 }
 
 std::shared_ptr<DataTypes::Value> JsonParser::parse() { return readValue("/"); }
+
+std::string JsonParser::getType(const std::string str, const std::string path) {
+  return DataTypes::typeToString(_values[str][path]->_type_id);
+}
+
+std::string JsonParser::getType(const DataTypes::Type type) {
+  return DataTypes::typeToString(type);
+}

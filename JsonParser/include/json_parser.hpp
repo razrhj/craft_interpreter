@@ -87,6 +87,10 @@ public:
   std::shared_ptr<DataTypes::Value> readArray(const std::string path);
 
   std::shared_ptr<DataTypes::Value> parse();
+
+  std::string getType(const std::string str, const std::string path);
+
+  std::string getType(const DataTypes::Type type);
 };
 
 #endif // !JSON_PARSER

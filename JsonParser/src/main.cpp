@@ -27,7 +27,8 @@ int main(int argc, char *argv[]) {
   printf("%s: \n", str.c_str());
   for (auto it = hash.begin(); it != hash.end(); it++) {
     printf("\t%s\n\t%s\n", it->first.c_str(),
-           DataTypes::getType(it->second->_type_id).c_str());
+           jp.getType(it->second->_type_id).c_str());
+    // jp.getType(str, it->second->_path).c_str());
   }
 
   return 0;

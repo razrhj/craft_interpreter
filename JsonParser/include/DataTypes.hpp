@@ -11,7 +11,7 @@ namespace DataTypes {
 
 enum Type { Init, OBJECT, ARRAY, KEY, STRING, True, False, Null, NUMBER };
 
-inline std::string getType(const Type type) {
+inline std::string typeToString(const Type type) {
   std::string ret = "NONE";
 
   switch (type) {
