@@ -96,12 +96,12 @@ src/clean: src/CMakeFiles/a.out.dir/clean
 src/CMakeFiles/a.out.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles --progress-num=1,2,3,4 "Built target a.out"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target a.out"
 .PHONY : src/CMakeFiles/a.out.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/a.out.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/a.out.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/flower/Code/craft_interpreter/JsonParser/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/a.out.dir/rule

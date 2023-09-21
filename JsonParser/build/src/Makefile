@@ -130,6 +130,30 @@ a.out/fast:
 	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/build
 .PHONY : a.out/fast
 
+file_operations.o: file_operations.cpp.o
+.PHONY : file_operations.o
+
+# target to build an object file
+file_operations.cpp.o:
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/file_operations.cpp.o
+.PHONY : file_operations.cpp.o
+
+file_operations.i: file_operations.cpp.i
+.PHONY : file_operations.i
+
+# target to preprocess a source file
+file_operations.cpp.i:
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/file_operations.cpp.i
+.PHONY : file_operations.cpp.i
+
+file_operations.s: file_operations.cpp.s
+.PHONY : file_operations.s
+
+# target to generate assembly for a file
+file_operations.cpp.s:
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/file_operations.cpp.s
+.PHONY : file_operations.cpp.s
+
 json_parser_parse.o: json_parser_parse.cpp.o
 .PHONY : json_parser_parse.o
 
@@ -178,6 +202,30 @@ json_parser_scan.cpp.s:
 	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser_scan.cpp.s
 .PHONY : json_parser_scan.cpp.s
 
+json_parser_write.o: json_parser_write.cpp.o
+.PHONY : json_parser_write.o
+
+# target to build an object file
+json_parser_write.cpp.o:
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser_write.cpp.o
+.PHONY : json_parser_write.cpp.o
+
+json_parser_write.i: json_parser_write.cpp.i
+.PHONY : json_parser_write.i
+
+# target to preprocess a source file
+json_parser_write.cpp.i:
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser_write.cpp.i
+.PHONY : json_parser_write.cpp.i
+
+json_parser_write.s: json_parser_write.cpp.s
+.PHONY : json_parser_write.s
+
+# target to generate assembly for a file
+json_parser_write.cpp.s:
+	cd /home/flower/Code/craft_interpreter/JsonParser/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/a.out.dir/build.make src/CMakeFiles/a.out.dir/json_parser_write.cpp.s
+.PHONY : json_parser_write.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -211,12 +259,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... a.out"
+	@echo "... file_operations.o"
+	@echo "... file_operations.i"
+	@echo "... file_operations.s"
 	@echo "... json_parser_parse.o"
 	@echo "... json_parser_parse.i"
 	@echo "... json_parser_parse.s"
 	@echo "... json_parser_scan.o"
 	@echo "... json_parser_scan.i"
 	@echo "... json_parser_scan.s"
+	@echo "... json_parser_write.o"
+	@echo "... json_parser_write.i"
+	@echo "... json_parser_write.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

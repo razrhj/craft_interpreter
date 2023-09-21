@@ -8,8 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/flower/Code/craft_interpreter/JsonParser/src/file_operations.cpp" "src/CMakeFiles/a.out.dir/file_operations.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/file_operations.cpp.o.d"
   "/home/flower/Code/craft_interpreter/JsonParser/src/json_parser_parse.cpp" "src/CMakeFiles/a.out.dir/json_parser_parse.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/json_parser_parse.cpp.o.d"
   "/home/flower/Code/craft_interpreter/JsonParser/src/json_parser_scan.cpp" "src/CMakeFiles/a.out.dir/json_parser_scan.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/json_parser_scan.cpp.o.d"
+  "/home/flower/Code/craft_interpreter/JsonParser/src/json_parser_write.cpp" "src/CMakeFiles/a.out.dir/json_parser_write.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/json_parser_write.cpp.o.d"
   "/home/flower/Code/craft_interpreter/JsonParser/src/main.cpp" "src/CMakeFiles/a.out.dir/main.cpp.o" "gcc" "src/CMakeFiles/a.out.dir/main.cpp.o.d"
   )
 
