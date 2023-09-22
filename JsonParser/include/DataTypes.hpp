@@ -53,10 +53,18 @@ struct Value;
 
 typedef struct Object {
   std::unordered_map<std::string, std::shared_ptr<Value>> _key_val;
+
+  std::shared_ptr<Value> const operator[](const std::string str) {
+    return _key_val[str];
+  }
 } Object;
 
 typedef struct Array {
   std::vector<std::shared_ptr<Value>> _vals;
+
+  std::shared_ptr<Value> const operator[](const int i) {
+    return _vals[i];
+  }
 } Array;
 
 typedef struct Value {
@@ -68,6 +76,7 @@ typedef struct Value {
   Value() {
     _type_id = Init;
     _path = "";
+    _val = 14250;
   }
 
   Value(const Type type, const std::string path) : _type_id(type), _path(path) {
@@ -90,6 +99,59 @@ typedef struct Value {
       _val = -1;
       break;
     }
+  }
+
+  Value operator[](const int i) {
+    if (auto ptr = std::get_if<Array>(&_val)) {
+      return *((*ptr)[i]);
+    }
+    return Value();
+  }
+
+  Value operator[](const std::string str) {
+    if (auto ptr = std::get_if<Object>(&_val)) {
+      return *((*ptr)[str]);
+    }
+    return Value();
+  }
+
+  Object getObjectValue() const {
+    if (_type_id == Type::STRING) {
+      return std::get<Object>(_val);
+    }
+    return Object();
+  }
+
+  Array getArrayValue() const {
+    if (_type_id == Type::ARRAY) {
+      return std::get<Array>(_val);
+    }
+    return Array();
+  }
+
+  std::string getStringValue() const {
+    if (_type_id == Type::STRING) {
+      return std::get<std::string>(_val);
+    }
+    return "";
+  }
+
+  int getIntValue() const {
+    if (_type_id == Type::NUMBER) {
+      if (auto ptr = std::get_if<int>(&_val)) {
+        return *ptr;
+      }
+    }
+    return -1;
+  }
+
+  double getDoubleValue() const {
+    if (_type_id == Type::NUMBER) {
+      if (auto ptr = std::get_if<double>(&_val)) {
+        return *ptr;
+      }
+    }
+    return -2.0;
   }
 
 } _value;

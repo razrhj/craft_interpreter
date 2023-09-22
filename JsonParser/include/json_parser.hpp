@@ -15,6 +15,7 @@
 class JsonParser {
 private:
   std::ifstream _ifs;
+  std::ofstream _ofs;
   std::string _file_path;
   std::string _buffer;
   int _idx;
@@ -26,7 +27,8 @@ private:
       std::unordered_map<std::string, std::shared_ptr<DataTypes::Value>>>
       _values;
 
-  std::shared_ptr<DataTypes::Value> _val;
+  /* std::shared_ptr<DataTypes::Value> _val; */
+  DataTypes::Value _val;
 
 public:
   JsonParser() {
@@ -39,7 +41,11 @@ public:
   JsonParser &operator=(const JsonParser &) = delete;
   ~JsonParser() = default;
 
-  std::shared_ptr<DataTypes::Value> getValue() {
+  /* std::shared_ptr<DataTypes::Value> getValue() { */
+  /*   return _val; */
+  /* } */
+
+  DataTypes::Value getValue() {
     return _val;
   }
 
@@ -100,20 +106,19 @@ public:
   std::shared_ptr<DataTypes::Value> parse();
 
   // Write
-  std::shared_ptr<DataTypes::Value> writeNumber(const std::string path);
+  void writeNumber(const std::string path);
 
-  std::shared_ptr<DataTypes::Value> writeSpecialLiteral(const std::string path);
+  void writeSpecialLiteral(const std::string path);
 
-  std::shared_ptr<DataTypes::Value> writeString(const std::string path,
-                                               const DataTypes::Type type);
+  void writeString(const std::string path, const DataTypes::Type type);
 
-  std::shared_ptr<DataTypes::Value> writeKey(const std::string path);
+  void writeKey(const std::string path);
 
-  std::shared_ptr<DataTypes::Value> writeValue(const std::string path);
+  void writeValue(const std::string path);
 
-  std::shared_ptr<DataTypes::Value> writeObject(const std::string path);
+  void writeObject(const std::string path);
 
-  std::shared_ptr<DataTypes::Value> writeArray(const std::string path);
+  void writeArray(const std::string path);
 
   std::string getType(const std::string str, const std::string path);
 

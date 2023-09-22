@@ -17,6 +17,19 @@ int main(int argc, char *argv[]) {
     printf("false\n");
   }
 
+  auto val = jp.getValue();
+
+  auto obj = std::get<DataTypes::Object>(val._val);
+  for (auto it = obj._key_val.begin(); it != obj._key_val.end(); it++) {
+    printf("%s\n", it->first.c_str());
+    auto obj1 = std::get<DataTypes::Object>(it->second->_val);
+    for (auto it1 = obj1._key_val.begin(); it1 != obj1._key_val.end(); it1++) {
+      printf("%s\n", it1->first.c_str());
+    }
+  }
+
+  printf("%s\n", val[R"("web-app")"][R"("servlet")"][0][R"("servlet-name")"].getStringValue().c_str());
+
   // jp.printValues();
 
   std::string str = R"("cofax.tld")";
