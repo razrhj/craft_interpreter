@@ -54,7 +54,7 @@ struct Value;
 typedef struct Object {
   std::unordered_map<std::string, std::shared_ptr<Value>> _key_val;
 
-  std::shared_ptr<Value> const operator[](const std::string str) {
+  std::shared_ptr<Value> operator[](const std::string str) {
     return _key_val[str];
   }
 } Object;
@@ -62,7 +62,7 @@ typedef struct Object {
 typedef struct Array {
   std::vector<std::shared_ptr<Value>> _vals;
 
-  std::shared_ptr<Value> const operator[](const int i) {
+  std::shared_ptr<Value> operator[](const int i) {
     return _vals[i];
   }
 } Array;
@@ -88,6 +88,7 @@ typedef struct Value {
       break;
     case ARRAY:
       _val = Array();
+      break;
     case KEY:
     case STRING:
     case True:
@@ -130,7 +131,7 @@ typedef struct Value {
   }
 
   std::string getStringValue() const {
-    if (_type_id == Type::STRING) {
+    if (_type_id == Type::STRING || _type_id == Type::KEY) {
       return std::get<std::string>(_val);
     }
     return "";

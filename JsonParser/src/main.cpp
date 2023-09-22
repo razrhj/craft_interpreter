@@ -4,6 +4,7 @@
 #include <memory>
 #include <regex>
 #include <unordered_map>
+#include <type_traits>
 
 int main(int argc, char *argv[]) {
 
@@ -19,16 +20,15 @@ int main(int argc, char *argv[]) {
 
   auto val = jp.getValue();
 
-  auto obj = std::get<DataTypes::Object>(val._val);
+  auto obj = std::get<DataTypes::Object>(val[R"("web-app")"][R"("taglib")"]._val);
   for (auto it = obj._key_val.begin(); it != obj._key_val.end(); it++) {
-    printf("%s\n", it->first.c_str());
-    auto obj1 = std::get<DataTypes::Object>(it->second->_val);
-    for (auto it1 = obj1._key_val.begin(); it1 != obj1._key_val.end(); it1++) {
-      printf("%s\n", it1->first.c_str());
-    }
+    printf("%-20s\t%-20s\n", it->first.c_str(), DataTypes::typeToString(it->second->_type_id).c_str());
   }
 
-  printf("%s\n", val[R"("web-app")"][R"("servlet")"][0][R"("servlet-name")"].getStringValue().c_str());
+  printf("%s\n", val[R"("web-app")"][R"("servlet")"][1][R"("init-param")"][R"("mailHost")"].getStringValue().c_str());
+  printf("%d\n", val[R"("web-app")"][R"("servlet")"]._type_id);
+  auto arr = std::get<DataTypes::Array>(val[R"("web-app")"][R"("servlet")"]._val);
+  printf("size: %d\n", arr._vals.size());
 
   // jp.printValues();
 

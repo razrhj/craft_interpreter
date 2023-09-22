@@ -169,7 +169,9 @@ JsonParser::readObject(const std::string path) {
 
       if (token == ":") {
         idxForward();
+
         std::shared_ptr<DataTypes::Value> val = readValue(local_path + "/");
+
         if (val) {
           if (auto obj = std::get_if<DataTypes::Object>(&(t_obj->_val))) {
             obj->_key_val[key] = val;
