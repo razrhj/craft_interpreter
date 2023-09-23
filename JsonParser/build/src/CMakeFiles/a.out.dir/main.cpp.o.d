@@ -1,7 +1,8 @@
 src/CMakeFiles/a.out.dir/main.cpp.o: \
  /home/flower/Code/craft_interpreter/JsonParser/src/main.cpp \
  /usr/include/stdc-predef.h \
- /home/flower/Code/craft_interpreter/JsonParser/src/../include/DataTypes.hpp \
+ /home/flower/Code/craft_interpreter/JsonParser/src/../include/json_parser.hpp \
+ /home/flower/Code/craft_interpreter/JsonParser/src/../include/./DataTypes.hpp \
  /usr/include/c++/13.2.1/memory /usr/include/c++/13.2.1/bits/memoryfwd.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -146,11 +147,9 @@ src/CMakeFiles/a.out.dir/main.cpp.o: \
  /usr/include/c++/13.2.1/bits/parse_numbers.h \
  /usr/include/c++/13.2.1/vector /usr/include/c++/13.2.1/bits/stl_vector.h \
  /usr/include/c++/13.2.1/bits/stl_bvector.h \
- /usr/include/c++/13.2.1/bits/vector.tcc \
- /home/flower/Code/craft_interpreter/JsonParser/src/../include/json_parser.hpp \
- /home/flower/Code/craft_interpreter/JsonParser/src/../include/./DataTypes.hpp \
- /usr/include/c++/13.2.1/fstream /usr/include/c++/13.2.1/istream \
- /usr/include/c++/13.2.1/ios /usr/include/c++/13.2.1/bits/ios_base.h \
+ /usr/include/c++/13.2.1/bits/vector.tcc /usr/include/c++/13.2.1/fstream \
+ /usr/include/c++/13.2.1/istream /usr/include/c++/13.2.1/ios \
+ /usr/include/c++/13.2.1/bits/ios_base.h \
  /usr/include/c++/13.2.1/bits/locale_classes.h \
  /usr/include/c++/13.2.1/bits/locale_classes.tcc \
  /usr/include/c++/13.2.1/system_error \
