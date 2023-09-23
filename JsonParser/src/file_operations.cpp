@@ -19,7 +19,6 @@ void JsonParser::readFromFile(std::string file_path) {
   // printf("%s\n", _buffer.c_str());
 }
 
-
 void JsonParser::writeToFile(std::string file_path) {
   _ofs.open(file_path, _ifs.out);
 

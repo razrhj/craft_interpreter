@@ -54,7 +54,7 @@ struct Value;
 typedef struct Object {
   std::unordered_map<std::string, std::shared_ptr<Value>> _key_val;
 
-  std::shared_ptr<Value> operator[](const std::string str) {
+  std::shared_ptr<Value> &operator[](const std::string str) {
     return _key_val[str];
   }
 } Object;
@@ -62,9 +62,8 @@ typedef struct Object {
 typedef struct Array {
   std::vector<std::shared_ptr<Value>> _vals;
 
-  std::shared_ptr<Value> operator[](const int i) {
-    return _vals[i];
-  }
+  std::shared_ptr<Value> &operator[](const int i) { return _vals[i]; }
+
 } Array;
 
 typedef struct Value {
@@ -102,57 +101,97 @@ typedef struct Value {
     }
   }
 
-  Value operator[](const int i) {
-    if (auto ptr = std::get_if<Array>(&_val)) {
-      return *((*ptr)[i]);
-    }
-    return Value();
+  Value &operator[](const int i) {
+    return *(std::get<Array>(_val)[i]);
+    // if (auto ptr = std::get_if<Array>(&_val)) {
+    //   return *((*ptr)[i]);
+    // }
+    // return Value();
   }
 
-  Value operator[](const std::string str) {
-    if (auto ptr = std::get_if<Object>(&_val)) {
-      return *((*ptr)[str]);
-    }
-    return Value();
+  Value &operator[](const std::string str) {
+    const std::string key = "\"" + str + "\"";
+    return *(std::get<Object>(_val)[key]);
+    // if (auto ptr = std::get_if<Object>(&_val)) {
+    //   return *((*ptr)[str]);
+    // }
+    // return Value();
+  }
+
+  Value &operator=(const std::string str) {
+    _val = "\"" + str + "\"";
+    _type_id = Type::STRING;
+    return *this;
+  }
+
+  Value &operator=(const int num) {
+    _val = num;
+    _type_id = Type::NUMBER;
+    return *this;
+  }
+
+  Value &operator=(const double num) {
+    _val = num;
+    _type_id = Type::NUMBER;
+    return *this;
+  }
+
+  Value &operator=(const Object& obj) {
+    _val = obj;
+    _type_id = Type::OBJECT;
+    return *this;
+  }
+
+  Value &operator=(const Array& arr) {
+    _val = arr;
+    _type_id = Type::ARRAY;
+    return *this;
   }
 
   Object getObjectValue() const {
-    if (_type_id == Type::STRING) {
-      return std::get<Object>(_val);
-    }
-    return Object();
+    return std::get<Object>(_val);
+    // if (_type_id == Type::STRING) {
+    //   return std::get<Object>(_val);
+    // }
+    // return Object();
   }
 
   Array getArrayValue() const {
-    if (_type_id == Type::ARRAY) {
-      return std::get<Array>(_val);
-    }
-    return Array();
+    return std::get<Array>(_val);
+    // if (_type_id == Type::ARRAY) {
+    //   return std::get<Array>(_val);
+    // }
+    // return Array();
   }
 
   std::string getStringValue() const {
-    if (_type_id == Type::STRING || _type_id == Type::KEY) {
-      return std::get<std::string>(_val);
-    }
-    return "";
+    return std::get<std::string>(_val);
+    // if (_type_id == Type::STRING || _type_id == Type::KEY ||
+    //     _type_id == Type::True || _type_id == Type::False ||
+    //     _type_id == Type::Null) {
+    //   return std::get<std::string>(_val);
+    // }
+    // return "";
   }
 
   int getIntValue() const {
-    if (_type_id == Type::NUMBER) {
-      if (auto ptr = std::get_if<int>(&_val)) {
-        return *ptr;
-      }
-    }
-    return -1;
+    return std::get<int>(_val);
+    // if (_type_id == Type::NUMBER) {
+    //   if (auto ptr = std::get_if<int>(&_val)) {
+    //     return *ptr;
+    //   }
+    // }
+    // return -1;
   }
 
   double getDoubleValue() const {
-    if (_type_id == Type::NUMBER) {
-      if (auto ptr = std::get_if<double>(&_val)) {
-        return *ptr;
-      }
-    }
-    return -2.0;
+    return std::get<double>(_val);
+    // if (_type_id == Type::NUMBER) {
+    //   if (auto ptr = std::get_if<double>(&_val)) {
+    //     return *ptr;
+    //   }
+    // }
+    // return -2.0;
   }
 
 } _value;

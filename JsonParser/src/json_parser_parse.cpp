@@ -53,14 +53,17 @@ JsonParser::readSpecialLiteral(const std::string path) {
   if (token == "true") {
     t_sl = std::shared_ptr<DataTypes::Value>(
         new DataTypes::Value(DataTypes::True, path));
+    t_sl->_val = token;
   }
   if (token == "false") {
     t_sl = std::shared_ptr<DataTypes::Value>(
         new DataTypes::Value(DataTypes::False, path));
+    t_sl->_val = token;
   }
   if (token == "null") {
     t_sl = std::shared_ptr<DataTypes::Value>(
         new DataTypes::Value(DataTypes::Null, path));
+    t_sl->_val = token;
   }
 
   t_sl->_path += token;
@@ -263,9 +266,14 @@ JsonParser::readArray(const std::string path) {
   return t_arr;
 }
 
-std::shared_ptr<DataTypes::Value> JsonParser::parse() { 
+std::shared_ptr<DataTypes::Value>
+JsonParser::parse(const std::string file_path) {
+  readFromFile(file_path);
+  scanBuffer();
   std::shared_ptr<DataTypes::Value> ret = readValue("/");
-  _val = *ret;
+  if (ret) {
+    _val = *ret;
+  }
   return ret;
 }
 

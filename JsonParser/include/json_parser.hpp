@@ -30,52 +30,8 @@ private:
   /* std::shared_ptr<DataTypes::Value> _val; */
   DataTypes::Value _val;
 
-public:
-  JsonParser() {
-    _idx = -1;
-    _id_arr = _id_obj = 0;
-  }
-  JsonParser(JsonParser &&) = default;
-  JsonParser(const JsonParser &) = delete;
-  JsonParser &operator=(JsonParser &&) = default;
-  JsonParser &operator=(const JsonParser &) = delete;
-  ~JsonParser() = default;
-
-  /* std::shared_ptr<DataTypes::Value> getValue() { */
-  /*   return _val; */
-  /* } */
-
-  DataTypes::Value getValue() {
-    return _val;
-  }
-
-  std::unordered_map<std::string, std::shared_ptr<DataTypes::Value>> const
-  operator[](const std::string str) {
-    return _values[str];
-  }
-
-  void printValues() {
-    for (auto it1 = _values.begin(); it1 != _values.end(); ++it1) {
-      printf("string:%s\n", it1->first.c_str());
-      for (auto it2 = it1->second.begin(); it2 != it1->second.end(); ++it2) {
-        printf("\t%s\n", it2->first.c_str());
-      }
-      printf("\n");
-    }
-  }
-
-  void printTokens() {
-    for (auto s : _tokens) {
-      printf("%s\n", s.c_str());
-    }
-  }
-
   // Scan
   void readFromFile(std::string file_path);
-
-  void writeToFile(std::string file_path);
-
-  void writeToFile();
 
   bool isBlank(char c);
 
@@ -103,22 +59,68 @@ public:
 
   std::shared_ptr<DataTypes::Value> readArray(const std::string path);
 
-  std::shared_ptr<DataTypes::Value> parse();
-
   // Write
-  void writeNumber(const std::string path);
+  std::string writeNumber(const double num);
 
-  void writeSpecialLiteral(const std::string path);
+  std::string writeSpecialLiteral(const std::string sl);
 
-  void writeString(const std::string path, const DataTypes::Type type);
+  std::string writeString(const std::string str);
 
-  void writeKey(const std::string path);
+  std::string writeKey(const std::string key);
 
-  void writeValue(const std::string path);
+  std::string writeValue(const DataTypes::Value &val);
 
-  void writeObject(const std::string path);
+  std::string writeObject(const DataTypes::Object &obj);
 
-  void writeArray(const std::string path);
+  std::string writeArray(const DataTypes::Array &arr);
+
+  void writeToFile(std::string file_path);
+
+  void writeToFile();
+
+public:
+  JsonParser() {
+    _idx = -1;
+    _id_arr = _id_obj = 0;
+  }
+  JsonParser(JsonParser &&) = default;
+  JsonParser(const JsonParser &) = delete;
+  JsonParser &operator=(JsonParser &&) = default;
+  JsonParser &operator=(const JsonParser &) = delete;
+  ~JsonParser() = default;
+
+  /* std::shared_ptr<DataTypes::Value> getValue() { */
+  /*   return _val; */
+  /* } */
+
+  DataTypes::Value &getValue() { return _val; }
+
+  std::unordered_map<std::string, std::shared_ptr<DataTypes::Value>> const
+  operator[](const std::string str) {
+    return _values[str];
+  }
+
+  void printValues() {
+    for (auto it1 = _values.begin(); it1 != _values.end(); ++it1) {
+      printf("string:%s\n", it1->first.c_str());
+      for (auto it2 = it1->second.begin(); it2 != it1->second.end(); ++it2) {
+        printf("\t%s\n", it2->first.c_str());
+      }
+      printf("\n");
+    }
+  }
+
+  void printTokens() {
+    for (auto s : _tokens) {
+      printf("%s\n", s.c_str());
+    }
+  }
+
+  std::shared_ptr<DataTypes::Value> parse(const std::string path);
+
+  std::string write();
+
+  std::string write(std::string file_path);
 
   std::string getType(const std::string str, const std::string path);
 
