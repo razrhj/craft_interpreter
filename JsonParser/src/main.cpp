@@ -22,5 +22,7 @@ int main(int argc, char *argv[]) {
   printf("\n%f\n", val[3]["web-app"]["servlet"][1]["init-param"]["mailHost"]
                        .getDoubleValue());
 
+  jp.write("../json_examples/json_example4.json");
+
   return 0;
 }
