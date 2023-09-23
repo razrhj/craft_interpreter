@@ -89,6 +89,16 @@ public:
   JsonParser &operator=(const JsonParser &) = delete;
   ~JsonParser() = default;
 
+  JsonParser(const std::string file_path) : _file_path(file_path) {
+    _idx = -1;
+    _id_arr = _id_obj = 0;
+    if (parse("../json_examples/json_example3.json")) {
+      printf("parsed successfully!\n");
+    } else {
+      printf("parsing failed\n");
+    }
+  }
+
   /* std::shared_ptr<DataTypes::Value> getValue() { */
   /*   return _val; */
   /* } */
