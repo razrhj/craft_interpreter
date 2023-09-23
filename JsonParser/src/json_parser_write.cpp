@@ -68,26 +68,26 @@ std::string JsonParser::writeValue(const DataTypes::Value &val) {
 
   case DataTypes::Init:
   case DataTypes::OBJECT: {
-    auto obj = std::get<DataTypes::Object>(val._val);
-    temp.append(writeObject(obj));
+    // auto obj = std::get<DataTypes::Object>(val._val);
+    temp.append(writeObject(std::get<DataTypes::Object>(val._val)));
   } break;
   case DataTypes::ARRAY: {
-    auto arr = std::get<DataTypes::Array>(val._val);
-    temp.append(writeArray(arr));
+    // auto arr = std::get<DataTypes::Array>(val._val);
+    temp.append(writeArray(std::get<DataTypes::Array>(val._val)));
   } break;
   case DataTypes::KEY: {
-    auto key = std::get<std::string>(val._val);
-    temp.append(writeKey(key));
+    // auto key = std::get<std::string>(val._val);
+    temp.append(writeKey(std::get<std::string>(val._val)));
   } break;
   case DataTypes::STRING: {
-    auto str = std::get<std::string>(val._val);
-    temp.append(writeString(str));
+    // auto str = std::get<std::string>(val._val);
+    temp.append(writeString(std::get<std::string>(val._val)));
   } break;
   case DataTypes::True:
   case DataTypes::False:
   case DataTypes::Null: {
-    auto sl = std::get<std::string>(val._val);
-    temp.append(writeSpecialLiteral(sl));
+    // auto sl = std::get<std::string>(val._val);
+    temp.append(writeSpecialLiteral(std::get<std::string>(val._val)));
   } break;
   case DataTypes::NUMBER: {
     auto i = std::get_if<int>(&val._val);
