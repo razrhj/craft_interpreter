@@ -269,7 +269,22 @@ JsonParser::parseArray(const std::string path) {
 
 std::shared_ptr<jsondatas::Value>
 JsonParser::parse(const std::string file_path) {
-  _buffer = io.readFromFile(file_path);
+  _buffer = io.readJson(file_path);
+
+  _tokens = sc.scanBuffer(_buffer);
+
+  std::shared_ptr<jsondatas::Value> ret = parseValue("/");
+
+  if (ret) {
+    _val = *ret;
+  }
+
+  return ret;
+}
+
+std::shared_ptr<jsondatas::Value>
+JsonParser::parse(std::istream &in) {
+  _buffer = io.readJson(in);
 
   _tokens = sc.scanBuffer(_buffer);
 

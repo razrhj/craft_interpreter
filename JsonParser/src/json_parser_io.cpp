@@ -1,7 +1,7 @@
 #include "../include/io.hpp"
 #include <sstream>
 
-std::string &InAndOut::readFromFile(std::string file_path) {
+std::string &IO::readJson(std::string file_path) {
   _file_path = file_path;
 
   _ifs.open(file_path, _ifs.in);
@@ -21,7 +21,18 @@ std::string &InAndOut::readFromFile(std::string file_path) {
   return _buffer;
 }
 
-void InAndOut::writeToFile(std::string file_path) {
+std::string &IO::readJson(std::istream &in) {
+  std::string line;
+  while (std::getline(in, line)) {
+    _buffer += line;
+  }
+
+  _ifs.close();
+  // printf("%s\n", _buffer.c_str());
+  return _buffer;
+}
+
+void IO::writeToFile(std::string file_path) {
   _ofs.open(file_path, _ifs.out);
 
   if (!_ofs.is_open()) {
@@ -34,7 +45,7 @@ void InAndOut::writeToFile(std::string file_path) {
   _ofs.close();
 }
 
-void InAndOut::writeToFile() {
+void IO::writeToFile() {
   _ofs.open(_file_path, _ifs.out);
 
   if (!_ofs.is_open()) {
@@ -47,7 +58,7 @@ void InAndOut::writeToFile() {
   _ofs.close();
 }
 
-std::string InAndOut::writeNumber(const double num) {
+std::string IO::writeNumber(const double num) {
   std::string temp;
   std::stringstream ss;
   ss << num;
@@ -55,22 +66,22 @@ std::string InAndOut::writeNumber(const double num) {
   return temp;
 }
 
-std::string InAndOut::writeSpecialLiteral(const std::string sl) {
+std::string IO::writeSpecialLiteral(const std::string sl) {
   std::string temp(sl);
   return temp;
 }
 
-std::string InAndOut::writeString(const std::string str) {
+std::string IO::writeString(const std::string str) {
   std::string temp(str);
   return temp;
 }
 
-std::string InAndOut::writeKey(const std::string key) {
+std::string IO::writeKey(const std::string key) {
   std::string temp(key);
   return temp;
 }
 
-std::string InAndOut::writeObject(const jsondatas::Object &obj) {
+std::string IO::writeObject(const jsondatas::Object &obj) {
   std::string temp;
 
   auto object = obj._key_val;
@@ -93,7 +104,7 @@ std::string InAndOut::writeObject(const jsondatas::Object &obj) {
   return temp;
 }
 
-std::string InAndOut::writeArray(const jsondatas::Array &arr) {
+std::string IO::writeArray(const jsondatas::Array &arr) {
   std::string temp;
 
   auto array = arr._vals;
@@ -113,7 +124,7 @@ std::string InAndOut::writeArray(const jsondatas::Array &arr) {
   return temp;
 }
 
-std::string InAndOut::writeValue(const jsondatas::Value &val) {
+std::string IO::writeValue(const jsondatas::Value &val) {
   std::string temp;
 
   switch (val._type_id) {
@@ -158,14 +169,14 @@ std::string InAndOut::writeValue(const jsondatas::Value &val) {
   return temp;
 }
 
-std::string InAndOut::write(const jsondatas::Value &_val) {
+std::string IO::write(const jsondatas::Value &_val) {
   _buffer.clear();
   _buffer.append(writeValue(_val));
   writeToFile();
   return _buffer;
 }
 
-std::string InAndOut::write(const jsondatas::Value &_val,
+std::string IO::write(const jsondatas::Value &_val,
                             const std::string file_path) {
   _buffer.clear();
   _buffer.append(writeValue(_val));

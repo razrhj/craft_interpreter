@@ -15,13 +15,13 @@
 
 class JsonParser {
 private:
+  IO io;
+  Scanner sc;
+
   // std::ifstream _ifs;
   // std::ofstream _ofs;
   std::string _file_path;
   std::string _buffer;
-
-  InAndOut io;
-  Scanner sc;
 
   int _idx;
   int _id_arr;
@@ -56,10 +56,11 @@ private:
   std::shared_ptr<jsondatas::Value> parseArray(const std::string path);
 
 public:
-  JsonParser() {
-    _idx = -1;
-    _id_arr = _id_obj = 0;
-  }
+  // JsonParser() {
+  //   _idx = -1;
+  //   _id_arr = _id_obj = 0;
+  // }
+  JsonParser() = delete;
   JsonParser(JsonParser &&) = default;
   JsonParser(const JsonParser &) = delete;
   JsonParser &operator=(JsonParser &&) = default;
@@ -71,6 +72,18 @@ public:
     _id_arr = _id_obj = 0;
 
     if (parse(file_path)) {
+      printf("parsed correctly!\n");
+    } else {
+      printf("parsing failed! Occurred certain Wrong!\n");
+    }
+  }
+
+  JsonParser(std::istream &in) {
+    _idx = -1;
+    _id_arr = _id_obj = 0;
+    _file_path = "";
+
+    if (parse(in)) {
       printf("parsed correctly!\n");
     } else {
       printf("parsing failed! Occurred certain Wrong!\n");
@@ -105,6 +118,7 @@ public:
   }
 
   std::shared_ptr<jsondatas::Value> parse(const std::string path);
+  std::shared_ptr<jsondatas::Value> parse(std::istream &in);
 
   std::string write() { return io.write(_val); }
 
@@ -113,6 +127,7 @@ public:
   std::string getType(const std::string str, const std::string path);
 
   std::string getType(const jsondatas::Type type);
+
 };
 
 #endif // !JSON_PARSER

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 
-class InAndOut {
+class IO {
 private:
   std::ifstream _ifs;
   std::ofstream _ofs;
@@ -13,15 +13,17 @@ private:
   std::string _buffer;
 
 public:
-  InAndOut() = default;
-  InAndOut(InAndOut &&) = default;
-  InAndOut(const InAndOut &) = delete;
-  InAndOut &operator=(InAndOut &&) = default;
-  InAndOut &operator=(const InAndOut &) = delete;
-  ~InAndOut() = default;
+  IO() = default;
+  IO(IO &&) = default;
+  IO(const IO &) = delete;
+  IO &operator=(IO &&) = default;
+  IO &operator=(const IO &) = delete;
+  ~IO() = default;
 
   // Scan
-  std::string &readFromFile(std::string file_path);
+  std::string &readJson(std::string file_path);
+
+  std::string &readJson(std::istream &in);
 
   // Write
   void writeToFile(std::string file_path);
