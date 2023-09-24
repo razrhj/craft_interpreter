@@ -69,10 +69,11 @@ public:
   JsonParser(const std::string file_path) : _file_path(file_path) {
     _idx = -1;
     _id_arr = _id_obj = 0;
+
     if (parse(file_path)) {
-      printf("parsed successfully!\n");
+      printf("parsed correctly!\n");
     } else {
-      printf("parsing failed\n");
+      printf("parsing failed! Occurred certain Wrong!\n");
     }
   }
 

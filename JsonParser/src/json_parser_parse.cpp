@@ -14,7 +14,7 @@ std::shared_ptr<jsondatas::Value>
 JsonParser::parseNumber(const std::string path) {
 
   std::shared_ptr<jsondatas::Value> t_num(
-      new jsondatas::Value(jsondatas::Type::NUMBER, path));
+      new jsondatas::Value(jsondatas::NUMBER, path));
 
   // std::regex
   // number_regex(R"(-?(0|[1-9][0-9]*)(\.[0-9]+)?((e|E)[-+]?[0-9]+)?)");
@@ -53,17 +53,17 @@ JsonParser::parseSpecialLiteral(const std::string path) {
 
   if (token == "true") {
     t_sl = std::shared_ptr<jsondatas::Value>(
-        new jsondatas::Value(jsondatas::Type::True, path));
+        new jsondatas::Value(jsondatas::True, path));
     t_sl->_val = token;
   }
   if (token == "false") {
     t_sl = std::shared_ptr<jsondatas::Value>(
-        new jsondatas::Value(jsondatas::Type::False, path));
+        new jsondatas::Value(jsondatas::False, path));
     t_sl->_val = token;
   }
   if (token == "null") {
     t_sl = std::shared_ptr<jsondatas::Value>(
-        new jsondatas::Value(jsondatas::Type::Null, path));
+        new jsondatas::Value(jsondatas::Null, path));
     t_sl->_val = token;
   }
 
@@ -118,7 +118,7 @@ JsonParser::parseString(const std::string path, const jsondatas::Type type) {
 }
 
 std::shared_ptr<jsondatas::Value> JsonParser::parseKey(const std::string path) {
-  return parseString(path, jsondatas::Type::KEY);
+  return parseString(path, jsondatas::KEY);
 }
 
 std::shared_ptr<jsondatas::Value>
@@ -139,7 +139,7 @@ JsonParser::parseValue(const std::string path) {
     return parseSpecialLiteral(path);
   }
   if (token[0] == '"') {
-    return parseString(path, jsondatas::Type::STRING);
+    return parseString(path, jsondatas::STRING);
   }
   if (token[0] == '-' || (token[0] >= '0' && token[0] <= '9')) {
     return parseNumber(path);
@@ -156,7 +156,7 @@ JsonParser::parseObject(const std::string path) {
   std::string local_path = path + cur_obj_id;
 
   std::shared_ptr<jsondatas::Value> t_obj(
-      new jsondatas::Value(jsondatas::Type::OBJECT, local_path));
+      new jsondatas::Value(jsondatas::OBJECT, local_path));
 
   std::string token = Peek();
   // printf("parseObject: %s\n", token.c_str());
@@ -226,7 +226,7 @@ JsonParser::parseArray(const std::string path) {
   std::string local_path = path + cur_arr_id;
 
   std::shared_ptr<jsondatas::Value> t_arr(
-      new jsondatas::Value(jsondatas::Type::ARRAY, local_path));
+      new jsondatas::Value(jsondatas::ARRAY, local_path));
 
   std::string token = Peek();
   // printf("parseArray: %s\n", token.c_str());
@@ -270,11 +270,15 @@ JsonParser::parseArray(const std::string path) {
 std::shared_ptr<jsondatas::Value>
 JsonParser::parse(const std::string file_path) {
   _buffer = io.readFromFile(file_path);
-  sc.scanBuffer(_buffer);
+
+  _tokens = sc.scanBuffer(_buffer);
+
   std::shared_ptr<jsondatas::Value> ret = parseValue("/");
+
   if (ret) {
     _val = *ret;
   }
+
   return ret;
 }
 

@@ -296,7 +296,7 @@ typedef struct Value {
     return *this;
   }
 
-  Object getObjectValue() const {
+  Object &getObjectValue() {
     return std::get<Object>(_val);
     // if (_type_id == Type::STRING) {
     //   return std::get<Object>(_val);
@@ -304,7 +304,7 @@ typedef struct Value {
     // return Object();
   }
 
-  Array getArrayValue() const {
+  Array &getArrayValue() {
     return std::get<Array>(_val);
     // if (_type_id == Type::ARRAY) {
     //   return std::get<Array>(_val);
@@ -312,7 +312,7 @@ typedef struct Value {
     // return Array();
   }
 
-  std::string getStringValue() const {
+  std::string &getStringValue() {
     return std::get<std::string>(_val);
     // if (_type_id == Type::STRING || _type_id == Type::KEY ||
     //     _type_id == Type::True || _type_id == Type::False ||
@@ -322,7 +322,7 @@ typedef struct Value {
     // return "";
   }
 
-  int getIntValue() const {
+  int &getIntValue() {
     return std::get<int>(_val);
     // if (_type_id == Type::NUMBER) {
     //   if (auto ptr = std::get_if<int>(&_val)) {
@@ -332,7 +332,7 @@ typedef struct Value {
     // return -1;
   }
 
-  double getDoubleValue() const {
+  double &getDoubleValue() {
     return std::get<double>(_val);
     // if (_type_id == Type::NUMBER) {
     //   if (auto ptr = std::get_if<double>(&_val)) {
