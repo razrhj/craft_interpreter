@@ -1,5 +1,6 @@
 #include "../include/json_parser.hpp"
 #include <cstdio>
+#include <fstream>
 #include <string>
 #include <variant>
 
@@ -9,11 +10,11 @@ std::string JsonParser::Peek() {
 
 void JsonParser::idxForward() { _idx++; }
 
-std::shared_ptr<DataTypes::Value>
-JsonParser::readNumber(const std::string path) {
+std::shared_ptr<jsondatas::Value>
+JsonParser::parseNumber(const std::string path) {
 
-  std::shared_ptr<DataTypes::Value> t_num(
-      new DataTypes::Value(DataTypes::NUMBER, path));
+  std::shared_ptr<jsondatas::Value> t_num(
+      new jsondatas::Value(jsondatas::Type::NUMBER, path));
 
   // std::regex
   // number_regex(R"(-?(0|[1-9][0-9]*)(\.[0-9]+)?((e|E)[-+]?[0-9]+)?)");
@@ -43,26 +44,26 @@ JsonParser::readNumber(const std::string path) {
   return nullptr;
 }
 
-std::shared_ptr<DataTypes::Value>
-JsonParser::readSpecialLiteral(const std::string path) {
+std::shared_ptr<jsondatas::Value>
+JsonParser::parseSpecialLiteral(const std::string path) {
 
   std::string token = Peek();
   // printf("special literal: %s\n", token.c_str());
-  std::shared_ptr<DataTypes::Value> t_sl;
+  std::shared_ptr<jsondatas::Value> t_sl;
 
   if (token == "true") {
-    t_sl = std::shared_ptr<DataTypes::Value>(
-        new DataTypes::Value(DataTypes::True, path));
+    t_sl = std::shared_ptr<jsondatas::Value>(
+        new jsondatas::Value(jsondatas::Type::True, path));
     t_sl->_val = token;
   }
   if (token == "false") {
-    t_sl = std::shared_ptr<DataTypes::Value>(
-        new DataTypes::Value(DataTypes::False, path));
+    t_sl = std::shared_ptr<jsondatas::Value>(
+        new jsondatas::Value(jsondatas::Type::False, path));
     t_sl->_val = token;
   }
   if (token == "null") {
-    t_sl = std::shared_ptr<DataTypes::Value>(
-        new DataTypes::Value(DataTypes::Null, path));
+    t_sl = std::shared_ptr<jsondatas::Value>(
+        new jsondatas::Value(jsondatas::Type::Null, path));
     t_sl->_val = token;
   }
 
@@ -74,10 +75,10 @@ JsonParser::readSpecialLiteral(const std::string path) {
   return t_sl;
 }
 
-std::shared_ptr<DataTypes::Value>
-JsonParser::readString(const std::string path, const DataTypes::Type type) {
+std::shared_ptr<jsondatas::Value>
+JsonParser::parseString(const std::string path, const jsondatas::Type type) {
 
-  std::shared_ptr<DataTypes::Value> t_str(new DataTypes::Value(type, path));
+  std::shared_ptr<jsondatas::Value> t_str(new jsondatas::Value(type, path));
 
   std::string token = Peek();
   // printf("string: %s\n", token.c_str());
@@ -116,32 +117,32 @@ JsonParser::readString(const std::string path, const DataTypes::Type type) {
   // return true;
 }
 
-std::shared_ptr<DataTypes::Value> JsonParser::readKey(const std::string path) {
-  return readString(path, DataTypes::KEY);
+std::shared_ptr<jsondatas::Value> JsonParser::parseKey(const std::string path) {
+  return parseString(path, jsondatas::Type::KEY);
 }
 
-std::shared_ptr<DataTypes::Value>
-JsonParser::readValue(const std::string path) {
+std::shared_ptr<jsondatas::Value>
+JsonParser::parseValue(const std::string path) {
 
   std::string token = Peek();
-  // printf("readValue: %s\n", token.c_str());
+  // printf("parseValue: %s\n", token.c_str());
 
   if (token == "{") {
     idxForward();
-    return readObject(path);
+    return parseObject(path);
   }
   if (token == "[") {
     idxForward();
-    return readArray(path);
+    return parseArray(path);
   }
   if (token == "true" || token == "false" || token == "null") {
-    return readSpecialLiteral(path);
+    return parseSpecialLiteral(path);
   }
   if (token[0] == '"') {
-    return readString(path, DataTypes::STRING);
+    return parseString(path, jsondatas::Type::STRING);
   }
   if (token[0] == '-' || (token[0] >= '0' && token[0] <= '9')) {
-    return readNumber(path);
+    return parseNumber(path);
   }
 
   // printf("path: %s\n", path.c_str());
@@ -149,39 +150,39 @@ JsonParser::readValue(const std::string path) {
   return nullptr;
 }
 
-std::shared_ptr<DataTypes::Value>
-JsonParser::readObject(const std::string path) {
+std::shared_ptr<jsondatas::Value>
+JsonParser::parseObject(const std::string path) {
   std::string cur_obj_id = "object" + std::to_string(++_id_obj);
   std::string local_path = path + cur_obj_id;
 
-  std::shared_ptr<DataTypes::Value> t_obj(
-      new DataTypes::Value(DataTypes::OBJECT, local_path));
+  std::shared_ptr<jsondatas::Value> t_obj(
+      new jsondatas::Value(jsondatas::Type::OBJECT, local_path));
 
   std::string token = Peek();
-  // printf("readObject: %s\n", token.c_str());
+  // printf("parseObject: %s\n", token.c_str());
 
   while (token != "}") {
     token = Peek();
-    // printf("readObject: %s\n", token.c_str());
+    // printf("parseObject: %s\n", token.c_str());
     std::string key;
-    if (readKey(local_path + "/")) {
+    if (parseKey(local_path + "/")) {
       key = token;
 
       token = Peek();
-      // printf("readObject: %s\n", token.c_str());
+      // printf("parseObject: %s\n", token.c_str());
 
       if (token == ":") {
         idxForward();
 
-        std::shared_ptr<DataTypes::Value> val = readValue(local_path + "/");
+        std::shared_ptr<jsondatas::Value> val = parseValue(local_path + "/");
 
         if (val) {
-          if (auto obj = std::get_if<DataTypes::Object>(&(t_obj->_val))) {
+          if (auto obj = std::get_if<jsondatas::Object>(&(t_obj->_val))) {
             obj->_key_val[key] = val;
           }
 
           token = Peek();
-          // printf("readObject: %s\n", token.c_str());
+          // printf("parseObject: %s\n", token.c_str());
 
           if (token == ",") {
             idxForward();
@@ -219,27 +220,27 @@ JsonParser::readObject(const std::string path) {
   return t_obj;
 }
 
-std::shared_ptr<DataTypes::Value>
-JsonParser::readArray(const std::string path) {
+std::shared_ptr<jsondatas::Value>
+JsonParser::parseArray(const std::string path) {
   std::string cur_arr_id = "array" + std::to_string(++_id_arr);
   std::string local_path = path + cur_arr_id;
 
-  std::shared_ptr<DataTypes::Value> t_arr(
-      new DataTypes::Value(DataTypes::ARRAY, local_path));
+  std::shared_ptr<jsondatas::Value> t_arr(
+      new jsondatas::Value(jsondatas::Type::ARRAY, local_path));
 
   std::string token = Peek();
-  // printf("readArray: %s\n", token.c_str());
+  // printf("parseArray: %s\n", token.c_str());
 
   while (token != "]") {
     token = Peek();
-    // printf("readArray: %s\n", token.c_str());
-    std::shared_ptr<DataTypes::Value> val = readValue(local_path + "/");
-    if (auto arr = std::get_if<DataTypes::Array>(&(t_arr->_val))) {
+    // printf("parseArray: %s\n", token.c_str());
+    std::shared_ptr<jsondatas::Value> val = parseValue(local_path + "/");
+    if (auto arr = std::get_if<jsondatas::Array>(&(t_arr->_val))) {
       arr->_vals.push_back(val);
     }
 
     token = Peek();
-    // printf("readArray: %s\n", token.c_str());
+    // printf("parseArray: %s\n", token.c_str());
     if (token == ",") {
       idxForward();
 
@@ -266,11 +267,11 @@ JsonParser::readArray(const std::string path) {
   return t_arr;
 }
 
-std::shared_ptr<DataTypes::Value>
+std::shared_ptr<jsondatas::Value>
 JsonParser::parse(const std::string file_path) {
-  readFromFile(file_path);
-  scanBuffer();
-  std::shared_ptr<DataTypes::Value> ret = readValue("/");
+  _buffer = io.readFromFile(file_path);
+  sc.scanBuffer(_buffer);
+  std::shared_ptr<jsondatas::Value> ret = parseValue("/");
   if (ret) {
     _val = *ret;
   }
@@ -278,9 +279,9 @@ JsonParser::parse(const std::string file_path) {
 }
 
 std::string JsonParser::getType(const std::string str, const std::string path) {
-  return DataTypes::typeToString(_values[str][path]->_type_id);
+  return jsondatas::typeToString(_values[str][path]->_type_id);
 }
 
-std::string JsonParser::getType(const DataTypes::Type type) {
-  return DataTypes::typeToString(type);
+std::string JsonParser::getType(const jsondatas::Type type) {
+  return jsondatas::typeToString(type);
 }

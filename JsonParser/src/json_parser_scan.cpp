@@ -1,18 +1,21 @@
-#include "../include/json_parser.hpp"
+#include "../include/scanner.hpp"
+#include <vector>
 
-bool JsonParser::isBlank(char c) {
+bool Scanner::isBlank(char c) {
   return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\v' ||
          c == '\b' || c == '\f';
 }
 
-bool JsonParser::isSeparator(char c) {
+bool Scanner::isSeparator(char c) {
   return c == '{' || c == '}' || c == '[' || c == ']' || c == ':' || c == ',';
 }
 
-void JsonParser::scanBuffer() {
+std::vector<std::string> &Scanner::scanBuffer(const std::string &_buffer) {
   std::string temp;
+
   int queto = 0;
   bool flag = true;
+
   for (int i = 0; i < _buffer.size(); ++i) {
     char c = _buffer[i];
     if (queto == 0) {
@@ -48,4 +51,6 @@ void JsonParser::scanBuffer() {
       queto = 0;
     }
   }
+
+  return _tokens;
 }

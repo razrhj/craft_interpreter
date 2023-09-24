@@ -1,5 +1,5 @@
-#ifndef DATA_TYPES
-#define DATA_TYPES
+#ifndef JSON_DATAS
+#define JSON_DATAS
 
 #include <cstdio>
 #include <memory>
@@ -8,7 +8,7 @@
 #include <variant>
 #include <vector>
 
-namespace DataTypes {
+namespace jsondatas {
 
 const std::shared_ptr<std::string> null = nullptr;
 
@@ -78,7 +78,7 @@ typedef struct Value {
   Value() {
     _type_id = Init;
     _path = "";
-    _val = Init;
+    _val = Type::Init;
   }
 
   Value(const Type type, const std::string path) : _type_id(type), _path(path) {
@@ -102,7 +102,7 @@ typedef struct Value {
       _val = 14250.1425014250;
       break;
     default:
-      _val = Init;
+      _val = Type::Init;
       break;
     }
   }
@@ -266,6 +266,12 @@ typedef struct Value {
     return *this;
   }
 
+  Value &operator=(const char *str) {
+    _val = "\"" + std::string(str) + "\"";
+    _type_id = Type::STRING;
+    return *this;
+  }
+
   Value &operator=(const int num) {
     _val = num;
     _type_id = Type::NUMBER;
@@ -338,6 +344,6 @@ typedef struct Value {
 
 } _value;
 
-} // namespace DataTypes
+} // namespace jsondatas
 
-#endif // !DATA_TYPES
+#endif // !JSON_DATAS
