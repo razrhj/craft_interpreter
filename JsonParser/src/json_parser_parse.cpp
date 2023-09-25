@@ -22,7 +22,7 @@ JsonParser::parseNumber(const std::string path) {
   std::regex int_regex(R"(-?(0|[1-9][0-9]*))");
 
   std::regex float_regex(
-      R"(-?(0|[1-9][0-9]*)((\.[0-9]+)|(e|E[-+]?[0-9]+)|(\.[0-9]+(e|E)[-+]?[0-9]+)))");
+      R"(-?(0|[1-9][0-9]*)((.[0-9]+)|(e|E[-+]?[0-9]+)|(.[0-9]+(e|E)[-+]?[0-9]+)))");
 
   std::string token = Peek();
   // printf("number: %s\n", token.c_str());
@@ -282,8 +282,7 @@ JsonParser::parse(const std::string file_path) {
   return ret;
 }
 
-std::shared_ptr<jsondatas::Value>
-JsonParser::parse(std::istream &in) {
+std::shared_ptr<jsondatas::Value> JsonParser::parse(std::istream &in) {
   _buffer = io.readJson(in);
 
   _tokens = sc.scanBuffer(_buffer);

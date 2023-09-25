@@ -1,5 +1,6 @@
 #include "../include/io.hpp"
 #include <sstream>
+#include <string>
 
 std::string &IO::readJson(std::string file_path) {
   _file_path = file_path;
@@ -59,10 +60,10 @@ void IO::writeToFile() {
 }
 
 std::string IO::writeNumber(const double num) {
-  std::string temp;
-  std::stringstream ss;
-  ss << num;
-  ss >> temp;
+  std::string temp = std::to_string(num);
+  // std::stringstream ss;
+  // ss << num;
+  // ss >> temp;
   return temp;
 }
 
@@ -177,7 +178,7 @@ std::string IO::write(const jsondatas::Value &_val) {
 }
 
 std::string IO::write(const jsondatas::Value &_val,
-                            const std::string file_path) {
+                      const std::string file_path) {
   _buffer.clear();
   _buffer.append(writeValue(_val));
   writeToFile(file_path);
