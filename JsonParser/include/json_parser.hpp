@@ -56,11 +56,7 @@ private:
   std::shared_ptr<jsondatas::Value> parseArray(const std::string path);
 
 public:
-  // JsonParser() {
-  //   _idx = -1;
-  //   _id_arr = _id_obj = 0;
-  // }
-  JsonParser() = delete;
+  JsonParser() { _idx = -1; }
   JsonParser(JsonParser &&) = default;
   JsonParser(const JsonParser &) = delete;
   JsonParser &operator=(JsonParser &&) = default;
@@ -127,7 +123,6 @@ public:
   std::string getType(const std::string str, const std::string path);
 
   std::string getType(const jsondatas::Type type);
-
 };
 
 #endif // !JSON_PARSER
