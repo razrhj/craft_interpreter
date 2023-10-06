@@ -1,5 +1,23 @@
+#pragma once
+
+#include "Lox.hpp"
+#include "Scanner.hpp"
+#include "Token.hpp"
+#include "TokenType.hpp"
+#include <cstdio>
+#include <cstdlib>
 #include <exception>
+#include <fstream>
+#include <iostream>
+#include <ostream>
+#include <ratio>
+#include <string>
+#include <variant>
+#include <vector>
+
 class Lox {
+  friend class Scanner;
+
 public:
   Lox() = default;
   Lox(Lox &&) = default;
@@ -8,12 +26,19 @@ public:
   Lox &operator=(const Lox &) = default;
   ~Lox() = default;
 
-  void main(int argc, char *argv[]) {
-    try {
-
-    } catch (const std::exception &) {
-    }
-  }
+  void main(int argc, char *argvs[]);
 
 private:
+  static bool hadError;
+
+  static void runFile(const char *path);
+
+  static void runPrompt();
+
+  static void run(const std::string source);
+
+  static void error(const int line, const std::string message);
+
+  static void report(const int line, const std::string where,
+                     const std::string message);
 };
