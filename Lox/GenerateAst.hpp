@@ -15,7 +15,7 @@ public:
   GenerateAst &operator=(const GenerateAst &) = default;
   ~GenerateAst() = default;
 
-  void main(int argc, char *argv[]) {
+  void run(int argc, char *argv[]) {
     if (argc != 2) {
       std::cerr << "Usage: generate_ast <output directory>" << std::endl;
       exit(64);

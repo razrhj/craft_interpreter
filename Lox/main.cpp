@@ -8,6 +8,6 @@
 
 int main(int argc, char *argv[]) {
   AstPrinter<std::string> ast;
-  ast.main(argc, argv);
+  ast.run(argc, argv);
   return 0;
 }

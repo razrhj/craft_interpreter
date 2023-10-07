@@ -2,7 +2,7 @@
 
 bool Lox::hadError = false;
 
-void Lox::main(int argc, char *argvs[]) {
+void Lox::run(int argc, char *argvs[]) {
   if (argc > 2) {
     fprintf(stdout, "Usage: jlox [script]\n");
     exit(64);

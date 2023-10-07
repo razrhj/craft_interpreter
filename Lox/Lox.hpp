@@ -26,7 +26,7 @@ public:
   Lox &operator=(const Lox &) = default;
   ~Lox() = default;
 
-  void main(int argc, char *argvs[]);
+  void run(int argc, char *argvs[]);
 
 private:
   static bool hadError;

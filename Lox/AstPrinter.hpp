@@ -15,7 +15,7 @@ public:
   AstPrinter &operator=(const AstPrinter &) = default;
   ~AstPrinter() = default;
 
-  void main(int argc, char *argv[]) {
+  void run(int argc, char *argv[]) {
     std::shared_ptr<Expr<R>> expression = std::make_shared<Binary<R>>(
         std::make_shared<Unary<R>>(Token(TokenType::MINUS, "-", Object(TokenType::NONE), 1),
                      std::make_shared<Literal<R>>(Object(123))),
