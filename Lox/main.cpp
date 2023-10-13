@@ -7,7 +7,7 @@
 #include <variant>
 
 int main(int argc, char *argv[]) {
-  AstPrinter<std::string> ast;
-  ast.run(argc, argv);
+  Lox lox;
+  lox.run(argc, argv);
   return 0;
 }

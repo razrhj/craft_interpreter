@@ -4,7 +4,7 @@
 #include <string>
 #include <variant>
 
-using Object = std::variant<TokenType, std::string, double, int>;
+using Object = std::variant<TokenType, std::string, double, int, bool>;
 inline std::string ObjectToString(const Object &obj) {
   std::string ret;
 

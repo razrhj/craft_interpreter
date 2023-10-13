@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Lox.hpp"
 #include "Scanner.hpp"
 #include "Token.hpp"
 #include "TokenType.hpp"
@@ -17,6 +16,7 @@
 
 class Lox {
   friend class Scanner;
+  friend class Parser;
 
 public:
   Lox() = default;
@@ -38,6 +38,8 @@ private:
   static void run(const std::string source);
 
   static void error(const int line, const std::string message);
+
+  static void error(const Token &token, const std::string &message);
 
   static void report(const int line, const std::string where,
                      const std::string message);
